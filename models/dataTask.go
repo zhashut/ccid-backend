@@ -29,13 +29,13 @@ type DataTaskUpdateReq struct {
 
 type DataTaskStatusReq struct {
 	OnlyIDRequest
-	Status int8 `json:"status" binding:"required"`
+	Status int `json:"status" binding:"required"`
 }
 
 type DataTaskListReq struct {
 	PageRequest
 	Type    string `form:"type"`
-	Status  int8   `form:"status"`
+	Status  int    `form:"status"`
 	Manager string `form:"manager"`
 	Keyword string `form:"keyword"`
 }

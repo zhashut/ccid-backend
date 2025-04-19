@@ -8,7 +8,7 @@ package models
  */
 
 type PageRequest struct {
-	Pages     int64  `json:"current"`   // 当前页号
+	Page      int64  `json:"page"`      // 当前页号
 	PageSize  int64  `json:"pageSize"`  // 页面大小
 	SortField string `json:"sortField"` // 排序字段
 	SortOrder string `json:"sortOrder"` // 排序顺序(默认升序)

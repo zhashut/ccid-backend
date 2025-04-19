@@ -99,7 +99,7 @@ func (s *DataTaskService) List(req *models.DataTaskListReq) ([]*models.DataTask,
 
 	// 分页查询
 	var list []*models.DataTask
-	err := query.Scopes(s.DB.Paginate(int(req.Pages), int(req.PageSize))).
+	err := query.Scopes(s.DB.Paginate(int(req.Page), int(req.PageSize))).
 		Order("id DESC").
 		Find(&list).Error
 
@@ -107,7 +107,7 @@ func (s *DataTaskService) List(req *models.DataTaskListReq) ([]*models.DataTask,
 }
 
 // UpdateStatus 更新任务状态
-func (s *DataTaskService) UpdateStatus(id int64, status int8) error {
+func (s *DataTaskService) UpdateStatus(id int64, status int) error {
 	if id <= 0 {
 		return errors.New("无效的ID")
 	}

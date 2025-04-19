@@ -96,7 +96,7 @@ func (s *DataPatentService) List(req *models.DataPatentListReq) ([]*models.DataP
 	}
 
 	var list []*models.DataPatent
-	err := query.Scopes(s.DB.Paginate(int(req.Pages), int(req.PageSize))).
+	err := query.Scopes(s.DB.Paginate(int(req.Page), int(req.PageSize))).
 		Order("`date` DESC").
 		Find(&list).Error
 

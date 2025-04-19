@@ -118,7 +118,7 @@ func (s *DataReportService) List(req *models.DataReportListReq) ([]*models.DataR
 
 	// 分页查询
 	var list []*models.DataReport
-	err := query.Scopes(s.DB.Paginate(int(req.Pages), int(req.PageSize))).
+	err := query.Scopes(s.DB.Paginate(int(req.Page), int(req.PageSize))).
 		Order("`time` DESC").
 		Find(&list).Error
 

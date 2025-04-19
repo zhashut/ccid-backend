@@ -43,7 +43,7 @@ type DataPropertyVo struct {
 	Title  string `json:"title"`
 	Source string `json:"source"`
 	Time   string `json:"time"` // yyyy-MM-dd 格式
-	Status string `json:"status"`
+	Status int    `json:"status"`
 }
 
 var dataPropertyStatusMap = map[int]string{
@@ -58,6 +58,6 @@ func (d *DataProperty) ToVo() *DataPropertyVo {
 		Title:  d.Title,
 		Source: d.Source,
 		Time:   d.Time.Format("2006-01-02"),
-		Status: dataPropertyStatusMap[d.Status],
+		Status: d.Status,
 	}
 }

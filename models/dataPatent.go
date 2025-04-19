@@ -52,7 +52,6 @@ type DataPatentCreateReq struct {
 	ID        int64  `json:"id" binding:"required"`
 	Title     string `json:"title" binding:"required"`
 	Applicant string `json:"applicant" binding:"required"`
-	Date      string `json:"date" binding:"required"` // 格式: 2006-01-02
 	Field     string `json:"field" binding:"required"`
 }
 

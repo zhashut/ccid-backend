@@ -87,7 +87,7 @@ func (s *TeamMemberService) List(req *models.TeamMemberListReq) ([]*models.TeamM
 	}
 
 	var list []*models.TeamMember
-	err := query.Scopes(s.DB.Paginate(int(req.Pages), int(req.PageSize))).
+	err := query.Scopes(s.DB.Paginate(int(req.Page), int(req.PageSize))).
 		Order("id DESC").
 		Find(&list).Error
 

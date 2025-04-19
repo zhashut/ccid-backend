@@ -111,7 +111,7 @@ func (s *DataPropertyService) List(req *models.DataPropertyListReq) ([]*models.D
 
 	// 分页查询
 	var list []*models.DataProperty
-	err := query.Scopes(s.DB.Paginate(int(req.Pages), int(req.PageSize))).
+	err := query.Scopes(s.DB.Paginate(int(req.Page), int(req.PageSize))).
 		Order("`time` DESC").
 		Find(&list).Error
 

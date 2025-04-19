@@ -48,7 +48,7 @@ type DataReportVo struct {
 	ID      int64  `json:"id"`
 	Name    string `json:"name"`
 	Type    string `json:"type"`
-	Status  string `json:"status"`
+	Status  int    `json:"status"`
 	Content string `json:"content"`
 	Time    string `json:"time"`
 }
@@ -63,7 +63,7 @@ func (d *DataReport) ToVo() *DataReportVo {
 		ID:      d.ID,
 		Name:    d.Name,
 		Type:    d.Type,
-		Status:  dataReportStatusMap[d.Status],
+		Status:  d.Status,
 		Content: d.Content,
 		Time:    d.Time.Format("2006-01-02"),
 	}

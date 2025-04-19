@@ -33,7 +33,7 @@ type TeamMemberListReq struct {
 type TeamMemberVo struct {
 	ID   int64  `json:"id"`
 	Name string `json:"name"`
-	Role string `json:"role"` // 返回角色文字描述
+	Role int    `json:"role"` // 返回角色文字描述
 }
 
 var roleMap = map[int]string{
@@ -46,6 +46,6 @@ func (t *TeamMember) ToVo() *TeamMemberVo {
 	return &TeamMemberVo{
 		ID:   t.ID,
 		Name: t.Name,
-		Role: roleMap[t.Role],
+		Role: t.Role,
 	}
 }
