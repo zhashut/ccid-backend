@@ -29,3 +29,10 @@ CREATE TABLE `data_report`
     `status`      TINYINT      NOT NULL DEFAULT 1 COMMENT '状态（1: 查看, 2: 编辑，3: 下载）',
     `create_time` DATE         NOT NULL COMMENT '生成时间'
 ) COMMENT '数据报告表';
+
+CREATE TABLE team_member
+(
+    id   bigint PRIMARY KEY AUTO_INCREMENT COMMENT '成员ID',
+    name VARCHAR(50) NOT NULL COMMENT '姓名',
+    role TINYINT     NOT NULL DEFAULT 1 COMMENT '角色（1: 查看, 2: 编辑, 3: 管理）'
+) COMMENT='团队成员表';

@@ -18,3 +18,7 @@ type DataTaskDao struct {
 type DataReportDao struct {
 	BaseDao
 }
+
+type TeamMemberDao struct {
+	BaseDao
+}

@@ -21,5 +21,6 @@ func Router() *gin.Engine {
 	routers.InitDataProperty(api)
 	routers.InitDataTask(api)
 	routers.InitDataReport(api)
+	routers.InitTeamMemberRouter(api)
 	return r
 }
