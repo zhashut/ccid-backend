@@ -19,6 +19,5 @@ func InitDataProperty(r *gin.RouterGroup) {
 		g.POST("/update", api.UpdateDataProperty)
 		g.POST("/delete", api.DeleteDataProperty)
 		g.GET("/list", api.ListDataProperty)
-		g.GET("/patentList", api.PatentList)
 	}
 }

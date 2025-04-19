@@ -92,28 +92,3 @@ func DeleteDataProperty(c *gin.Context) {
 
 	global.ResponseSuccess(c, nil)
 }
-
-// PatentList 专利专用列表
-func PatentList(c *gin.Context) {
-	var req models.PatentListReq
-	if err := c.ShouldBind(&req); err != nil {
-		global.ResponseFailed(c, global.ErrorInvalidParams)
-		return
-	}
-
-	list, total, err := dataPropertyService.PatentList(&req)
-	if err != nil {
-		global.ResponseFailed(c, global.ErrorPERATION)
-		return
-	}
-
-	result := make([]*models.PatentListVo, 0, len(list))
-	for _, item := range list {
-		result = append(result, item.ToPatentVo())
-	}
-
-	global.ResponseSuccess(c, gin.H{
-		"list":  result,
-		"total": total,
-	})
-}

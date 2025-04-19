@@ -73,24 +73,15 @@ func (s *DataPropertyService) List(req *models.DataPropertyListReq) ([]*models.D
 
 	// 构建查询条件
 	if req.Type != "" {
-		query = query.Where("type = ?", req.Type)
+		query = query.Where("`type` = ?", req.Type)
 	}
 	if req.Status != 0 {
-		query = query.Where("status = ?", req.Status)
-	}
-	if req.TechnicalField != "" {
-		query = query.Where("technical_field LIKE ?", "%"+req.TechnicalField+"%")
-	}
-	if req.Applier != "" {
-		query = query.Where("applier = ?", req.Applier)
-	}
-	if req.PatentID != "" {
-		query = query.Where("patent_id = ?", req.PatentID)
+		query = query.Where("`status` = ?", req.Status)
 	}
 
 	if req.Keyword != "" {
 		keyword := "%" + req.Keyword + "%"
-		query = query.Where("title LIKE ? OR `source` LIKE ? LIKE ?",
+		query = query.Where("title LIKE ? OR `source` LIKE ?",
 			keyword, keyword)
 	}
 
@@ -103,42 +94,7 @@ func (s *DataPropertyService) List(req *models.DataPropertyListReq) ([]*models.D
 	// 分页查询
 	var list []*models.DataProperty
 	err := query.Scopes(s.DB.Paginate(int(req.Pages), int(req.PageSize))).
-		Order("apply_time DESC").
-		Find(&list).Error
-
-	return list, total, err
-}
-
-// PatentList 专利专用列表查询
-func (s *DataPropertyService) PatentList(req *models.PatentListReq) ([]*models.DataProperty, int64, error) {
-	query := global.DB.Model(&models.DataProperty{}).
-		Select("patent_id, title, applier, apply_time, technical_field").
-		Where("type = ?", "专利")
-
-	// 模糊搜索条件
-	if req.Keyword != "" {
-		keyword := "%" + req.Keyword + "%"
-		query = query.Where(
-			"patent_id LIKE ? OR title LIKE ? OR applier LIKE ? OR technical_field LIKE ?",
-			keyword, keyword, keyword, keyword,
-		)
-	}
-
-	// 技术领域筛选
-	if req.TechnicalField != "" {
-		query = query.Where("technical_field = ?", req.TechnicalField)
-	}
-
-	// 获取总数
-	var total int64
-	if err := query.Count(&total).Error; err != nil {
-		return nil, 0, err
-	}
-
-	// 分页查询
-	var list []*models.DataProperty
-	err := query.Scopes(s.DB.Paginate(int(req.Pages), int(req.PageSize))).
-		Order("apply_time DESC").
+		Order("`time` DESC").
 		Find(&list).Error
 
 	return list, total, err
