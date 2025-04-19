@@ -58,6 +58,7 @@ func (s *DataTaskService) Update(req *models.DataTaskUpdateReq) (*models.DataTas
 		return nil, errors.New("更新需要指定ID")
 	}
 	task := models.DataTask{
+		ID:      req.ID,
 		Name:    req.Name,
 		Type:    req.Type,
 		Manager: req.Manager,

@@ -68,6 +68,7 @@ func (s *DataPatentService) Update(req *models.DataPatentUpdateReq) (*models.Dat
 		return nil, errors.New("专利号不能为空")
 	}
 	patent := models.DataPatent{
+		ID:        req.ID,
 		Title:     req.Title,
 		Applicant: req.Applicant,
 		Field:     req.Field,

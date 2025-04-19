@@ -60,6 +60,7 @@ func (s *DataReportService) Update(req *models.DataReportUpdateReq) (*models.Dat
 		return nil, errors.New("更新需要指定ID")
 	}
 	report := models.DataReport{
+		ID:      req.ID,
 		Name:    req.Name,
 		Type:    req.Type,
 		Status:  req.Status,

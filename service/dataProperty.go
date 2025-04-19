@@ -29,7 +29,6 @@ func (s *DataPropertyService) Create(req *models.DataPropertyCreateReq) (*models
 	if req.Title == "" {
 		return nil, errors.New("标题不能为空")
 	}
-
 	dataProperty := models.DataProperty{
 		Type:   req.Type,
 		Title:  req.Title,
@@ -37,7 +36,6 @@ func (s *DataPropertyService) Create(req *models.DataPropertyCreateReq) (*models
 		Time:   time.Now(),
 		Status: req.Status,
 	}
-
 	result, err := s.DB.SaveChange(&dataProperty)
 	if err != nil {
 		return nil, err
@@ -58,14 +56,13 @@ func (s *DataPropertyService) Update(req *models.DataPropertyUpdateReq) (*models
 	if req.ID == 0 {
 		return nil, errors.New("更新需要指定ID")
 	}
-
 	dataProperty := models.DataProperty{
+		ID:     req.ID,
 		Type:   req.Type,
 		Title:  req.Title,
 		Source: req.Source,
 		Status: req.Status,
 	}
-
 	result, err := s.DB.SaveChange(&dataProperty)
 	if err != nil {
 		return nil, err

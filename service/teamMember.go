@@ -56,6 +56,7 @@ func (s *TeamMemberService) Update(req *models.TeamMemberUpdateReq) (*models.Tea
 		return nil, errors.New("更新需要指定ID")
 	}
 	member := models.TeamMember{
+		ID:   req.ID,
 		Name: req.Name,
 		Role: req.Role,
 	}
