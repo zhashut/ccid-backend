@@ -6,6 +6,7 @@ import (
 	"go-init/global"
 	"go-init/models"
 	"go-init/respository/db"
+	"time"
 )
 
 /**
@@ -24,12 +25,17 @@ func NewDataPatentService() *DataPatentService {
 }
 
 // Create 创建专利
-func (s *DataPatentService) Create(patent *models.DataPatentCreateReq) (*models.DataPatent, error) {
-	if patent.Title == "" {
+func (s *DataPatentService) Create(req *models.DataPatentCreateReq) (*models.DataPatent, error) {
+	if req.Title == "" {
 		return nil, errors.New("专利标题不能为空")
 	}
-
-	result, err := s.DB.SaveChange(patent)
+	patent := models.DataPatent{
+		Title:     req.Title,
+		Applicant: req.Applicant,
+		Date:      time.Now(),
+		Field:     req.Field,
+	}
+	result, err := s.DB.SaveChange(&patent)
 	if err != nil {
 		return nil, err
 	}
@@ -57,11 +63,16 @@ func (s *DataPatentService) GetByID(id int64) (*models.DataPatent, error) {
 }
 
 // Update 更新专利
-func (s *DataPatentService) Update(patent *models.DataPatentUpdateReq) (*models.DataPatent, error) {
-	if patent.ID == 0 {
+func (s *DataPatentService) Update(req *models.DataPatentUpdateReq) (*models.DataPatent, error) {
+	if req.ID == 0 {
 		return nil, errors.New("专利号不能为空")
 	}
-	result, err := s.DB.SaveChange(patent)
+	patent := models.DataPatent{
+		Title:     req.Title,
+		Applicant: req.Applicant,
+		Field:     req.Field,
+	}
+	result, err := s.DB.SaveChange(&patent)
 	if err != nil {
 		return nil, err
 	}

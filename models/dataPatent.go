@@ -49,11 +49,11 @@ func (d *DataPatent) ToVo() *DataPatentVo {
 
 // DataPatentCreateReq 创建专利请求
 type DataPatentCreateReq struct {
-	ID      int64  `json:"id" binding:"required"`
-	Title   string `json:"title" binding:"required"`
-	Applier string `json:"applier" binding:"required"`
-	Date    string `json:"date" binding:"required"` // 格式: 2006-01-02
-	Field   string `json:"field" binding:"required"`
+	ID        int64  `json:"id" binding:"required"`
+	Title     string `json:"title" binding:"required"`
+	Applicant string `json:"applicant" binding:"required"`
+	Date      string `json:"date" binding:"required"` // 格式: 2006-01-02
+	Field     string `json:"field" binding:"required"`
 }
 
 // DataPatentUpdateReq 更新专利请求
@@ -61,6 +61,5 @@ type DataPatentUpdateReq struct {
 	ID        int64  `json:"id" binding:"required"`
 	Title     string `json:"title"`
 	Applicant string `json:"applicant"`
-	Date      string `json:"date"` // 格式: 2006-01-02
 	Field     string `json:"field"`
 }

@@ -22,7 +22,6 @@ type DataPropertyCreateReq struct {
 	Type   string `json:"type" binding:"required"`
 	Title  string `json:"title" binding:"required"`
 	Source string `json:"source" binding:"required"`
-	Time   string `json:"time"`
 	Status int    `json:"status"`
 }
 

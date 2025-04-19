@@ -6,6 +6,7 @@ import (
 	"go-init/global"
 	"go-init/models"
 	"go-init/respository/db"
+	"time"
 )
 
 /**
@@ -24,11 +25,20 @@ func NewDataPropertyService() *DataPropertyService {
 }
 
 // Create 创建知识产权
-func (s *DataPropertyService) Create(property *models.DataPropertyCreateReq) (*models.DataProperty, error) {
-	if property.Title == "" {
+func (s *DataPropertyService) Create(req *models.DataPropertyCreateReq) (*models.DataProperty, error) {
+	if req.Title == "" {
 		return nil, errors.New("标题不能为空")
 	}
-	result, err := s.DB.SaveChange(property)
+
+	dataProperty := models.DataProperty{
+		Type:   req.Type,
+		Title:  req.Title,
+		Source: req.Source,
+		Time:   time.Now(),
+		Status: req.Status,
+	}
+
+	result, err := s.DB.SaveChange(&dataProperty)
 	if err != nil {
 		return nil, err
 	}
@@ -44,11 +54,19 @@ func (s *DataPropertyService) DeleteByID(id int64) error {
 }
 
 // Update 更新知识产权
-func (s *DataPropertyService) Update(property *models.DataPropertyUpdateReq) (*models.DataProperty, error) {
-	if property.ID == 0 {
+func (s *DataPropertyService) Update(req *models.DataPropertyUpdateReq) (*models.DataProperty, error) {
+	if req.ID == 0 {
 		return nil, errors.New("更新需要指定ID")
 	}
-	result, err := s.DB.SaveChange(property)
+
+	dataProperty := models.DataProperty{
+		Type:   req.Type,
+		Title:  req.Title,
+		Source: req.Source,
+		Status: req.Status,
+	}
+
+	result, err := s.DB.SaveChange(&dataProperty)
 	if err != nil {
 		return nil, err
 	}

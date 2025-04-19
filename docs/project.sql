@@ -19,11 +19,12 @@ CREATE TABLE `data_task`
 
 CREATE TABLE `data_report`
 (
-    `id`          bigint PRIMARY KEY AUTO_INCREMENT COMMENT '报告ID',
-    `name`        VARCHAR(255) NOT NULL COMMENT '报告名称',
-    `type`        VARCHAR(255) NOT NULL COMMENT '报告类型（专利分析/技术分析/市场分析）',
-    `status`      TINYINT      NOT NULL DEFAULT 1 COMMENT '状态（1: 查看, 2: 编辑，3: 下载）',
-    `create_time` DATE         NOT NULL COMMENT '生成时间'
+    `id`      bigint PRIMARY KEY AUTO_INCREMENT COMMENT '报告ID',
+    `name`    VARCHAR(255) NOT NULL COMMENT '报告名称',
+    `type`    VARCHAR(255) NOT NULL COMMENT '报告类型（专利分析/技术分析/市场分析）',
+    `status`  TINYINT      NOT NULL DEFAULT 1 COMMENT '状态（1: 进行中, 2: 已完成）',
+    `time`    DATE         NOT NULL COMMENT '生成时间',
+    `content` TEXT         NOT NULL COMMENT '报告内容'
 ) COMMENT '数据报告表';
 
 CREATE TABLE data_patent
