@@ -4,7 +4,7 @@ package db
  * @author: zhashut
  * Date: 2025/4/18
  * Time: 23:47
- * Description: 知识产权信息-数据层
+ * Description: 数据层
  */
 
 type DataPropertyDao struct {
@@ -16,6 +16,10 @@ type DataTaskDao struct {
 }
 
 type DataReportDao struct {
+	BaseDao
+}
+
+type DataPatentDao struct {
 	BaseDao
 }
 

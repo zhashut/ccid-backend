@@ -1,15 +1,11 @@
 CREATE TABLE `data_property`
 (
-    `id`              bigint PRIMARY KEY AUTO_INCREMENT COMMENT '数据ID',
-    `type`            VARCHAR(255) NOT NULL COMMENT '数据类型（专利/论文/软件著作权）',
-    `title`           VARCHAR(255) NOT NULL COMMENT '标题',
-    `source`          VARCHAR(255) NOT NULL COMMENT '来源',
-    `collect_time`    DATE NULL COMMENT '采集时间',
-    `status`          TINYINT      NOT NULL DEFAULT 1 COMMENT '状态（1: 进行中, 2: 已完成）',
-    `patent_id`       VARCHAR(255) NOT NULL COMMENT '专利号',
-    `applier`         VARCHAR(255) NOT NULL COMMENT '申请人',
-    `apply_time`      DATE         NOT NULL COMMENT '申请日期',
-    `technical_field` VARCHAR(255) COMMENT '技术领域（如机器学习/计算机视觉）'
+    `id`     bigint PRIMARY KEY AUTO_INCREMENT COMMENT '数据ID',
+    `type`   VARCHAR(255) NOT NULL COMMENT '数据类型（专利/论文/软件著作权）',
+    `title`  VARCHAR(255) NOT NULL COMMENT '标题',
+    `source` VARCHAR(255) NOT NULL COMMENT '来源',
+    `time`   DATE         NOT NULL COMMENT '采集时间',
+    `status` TINYINT      NOT NULL DEFAULT 1 COMMENT '状态（1: 进行中, 2: 已完成）',
 ) COMMENT '知识产权信息表';
 
 CREATE TABLE `data_task`
@@ -29,6 +25,15 @@ CREATE TABLE `data_report`
     `status`      TINYINT      NOT NULL DEFAULT 1 COMMENT '状态（1: 查看, 2: 编辑，3: 下载）',
     `create_time` DATE         NOT NULL COMMENT '生成时间'
 ) COMMENT '数据报告表';
+
+CREATE TABLE data_patent
+(
+    `id`        bigint PRIMARY KEY AUTO_INCREMENT COMMENT '专利ID',
+    `title`     VARCHAR(255) NOT NULL COMMENT '专利名称',
+    `applicant` VARCHAR(255) NOT NULL COMMENT '申请人',
+    `date`      DATE         NOT NULL COMMENT '申请日期',
+    `field`     VARCHAR(255) NOT NULL COMMENT '技术领域',
+) COMMENT='专利数据表';
 
 CREATE TABLE team_member
 (
