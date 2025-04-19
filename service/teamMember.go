@@ -24,14 +24,18 @@ func NewTeamMemberService() *TeamMemberService {
 }
 
 // Create 创建成员
-func (s *TeamMemberService) Create(member *models.TeamMemberCreateReq) (*models.TeamMember, error) {
-	if member.Name == "" {
+func (s *TeamMemberService) Create(req *models.TeamMemberCreateReq) (*models.TeamMember, error) {
+	if req.Name == "" {
 		return nil, errors.New("成员姓名不能为空")
 	}
-	if member.Role < 1 || member.Role > 3 {
+	if req.Role < 1 || req.Role > 3 {
 		return nil, errors.New("无效的角色值")
 	}
-	result, err := s.DB.SaveChange(member)
+	member := models.TeamMember{
+		Name: req.Name,
+		Role: req.Role,
+	}
+	result, err := s.DB.SaveChange(&member)
 	if err != nil {
 		return nil, err
 	}
@@ -47,11 +51,15 @@ func (s *TeamMemberService) DeleteByID(id int64) error {
 }
 
 // Update 更新成员
-func (s *TeamMemberService) Update(member *models.TeamMemberUpdateReq) (*models.TeamMember, error) {
-	if member.ID == 0 {
+func (s *TeamMemberService) Update(req *models.TeamMemberUpdateReq) (*models.TeamMember, error) {
+	if req.ID == 0 {
 		return nil, errors.New("更新需要指定ID")
 	}
-	result, err := s.DB.SaveChange(member)
+	member := models.TeamMember{
+		Name: req.Name,
+		Role: req.Role,
+	}
+	result, err := s.DB.SaveChange(&member)
 	if err != nil {
 		return nil, err
 	}

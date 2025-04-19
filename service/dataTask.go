@@ -24,14 +24,20 @@ func NewDataTaskService() *DataTaskService {
 }
 
 // Create 创建数据任务
-func (s *DataTaskService) Create(task *models.DataTaskCreateReq) (*models.DataTask, error) {
-	if task.Name == "" {
+func (s *DataTaskService) Create(req *models.DataTaskCreateReq) (*models.DataTask, error) {
+	if req.Name == "" {
 		return nil, errors.New("任务名称不能为空")
 	}
-	if task.Manager == "" {
+	if req.Manager == "" {
 		return nil, errors.New("负责人不能为空")
 	}
-	result, err := s.DB.SaveChange(task)
+	task := models.DataTask{
+		Name:    req.Name,
+		Type:    req.Type,
+		Manager: req.Manager,
+		Status:  req.Status,
+	}
+	result, err := s.DB.SaveChange(&task)
 	if err != nil {
 		return nil, err
 	}
@@ -47,11 +53,17 @@ func (s *DataTaskService) DeleteByID(id int64) error {
 }
 
 // Update 更新数据任务
-func (s *DataTaskService) Update(task *models.DataTaskUpdateReq) (*models.DataTask, error) {
-	if task.ID == 0 {
+func (s *DataTaskService) Update(req *models.DataTaskUpdateReq) (*models.DataTask, error) {
+	if req.ID == 0 {
 		return nil, errors.New("更新需要指定ID")
 	}
-	result, err := s.DB.SaveChange(task)
+	task := models.DataTask{
+		Name:    req.Name,
+		Type:    req.Type,
+		Manager: req.Manager,
+		Status:  req.Status,
+	}
+	result, err := s.DB.SaveChange(&task)
 	if err != nil {
 		return nil, err
 	}
@@ -76,10 +88,10 @@ func (s *DataTaskService) List(req *models.DataTaskListReq) ([]*models.DataTask,
 
 	// 构建查询条件
 	if req.Type != "" {
-		query = query.Where("type = ?", req.Type)
+		query = query.Where("`type` = ?", req.Type)
 	}
 	if req.Status != 0 {
-		query = query.Where("status = ?", req.Status)
+		query = query.Where("`status` = ?", req.Status)
 	}
 	if req.Manager != "" {
 		query = query.Where("manager = ?", req.Manager)
@@ -116,5 +128,5 @@ func (s *DataTaskService) UpdateStatus(id int64, status int) error {
 	}
 	return global.DB.Model(&models.DataTask{}).
 		Where("id = ?", id).
-		Update("status", status).Error
+		Update("`status`", status).Error
 }
